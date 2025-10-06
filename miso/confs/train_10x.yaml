@@ -1,0 +1,38 @@
+dataset:
+  _target_: miso.data.loading.DatasetSlide
+  path_to_feats: ~/project/10X_data/processed
+  path_to_counts: ~/project/10X_data/processed
+  path_to_neighbors: ~/project/10X_data/processed
+  path_to_gene_list: ~/miso/assets/100_genes.csv
+  normalization: raw_reads
+
+model:
+  _target_: miso.models.LocalAttentionMIL
+  emb_dim: 2048
+  depth: 1
+  d_model: 1024
+  num_heads: 64
+  device: cuda
+
+optimizer:
+  _target_: torch.optim.Adam
+  lr: 1e-3
+  weight_decay: 0.
+
+criterion:
+  _target_: miso.engine.losses.LossWrapper
+  loss_fn:
+    _target_: miso.engine.losses.CosineSimilarityLoss
+
+training:
+  n_repeats: 1
+  n_folds: 3
+  random_state: 42
+  save_dir: ~/miso/outputs/miso_10x
+  exp_name: first_exp
+  save_model: True
+
+fit_params:
+  n_epochs: 5
+  batch_size: 1
+  num_workers: 8

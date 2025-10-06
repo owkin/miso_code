@@ -1,0 +1,40 @@
+dataset:
+  _target_: miso.data.loading.DatasetSlide
+  path_to_feats: ~/project/her2ST/processed_data/
+  path_to_counts: ~/project/her2ST/processed_data/
+  path_to_neighbors: ~/project/her2ST/processed_data/
+  path_to_gene_list: ~/miso/assets/genes_her2st_all.csv
+  normalization: raw_reads
+  n_tiles: 712
+
+model:
+  _target_: miso.models.LocalAttentionMIL
+  emb_dim: 2048
+  depth: 1
+  d_model: 1024
+  num_heads: 64
+  device: cuda
+
+optimizer:
+  _target_: torch.optim.Adam
+  lr: 1e-4
+  weight_decay: 0.
+
+criterion:
+  _target_: miso.engine.losses.LossWrapper
+  loss_fn:
+    _target_: miso.engine.losses.CosineSimilarityLoss
+
+training:
+  n_repeats: 1
+  n_folds: 4
+  random_state: 0
+  save_dir: ~/miso/outputs/miso_her2st
+  exp_name: miso_her2st
+  save_model: True
+  splits: ~/miso/assets/splits_benchmark_her2st.pkl
+
+fit_params:
+  n_epochs: 5
+  batch_size: 1
+  num_workers: 8

@@ -1,0 +1,38 @@
+dataset:
+  _target_: miso.data.loading.DatasetSlideSubsample
+  path_to_feats: ~/project/her2ST/processed_data
+  path_to_counts: ~/project/her2ST/processed_data
+  path_to_gene_list: ~/miso/assets/genes_her2st_all.csv
+  normalization: pseudolabels
+
+model:
+  _target_: miso.models.SimpleMIL
+  hidden: [1024, 512]
+  activation:
+    _target_: torch.nn.ReLU
+  agg_method: mean
+  device: cuda
+
+optimizer:
+  _target_: torch.optim.Adam
+  lr: 1e-3
+  weight_decay: 0.
+
+criterion:
+  _target_: miso.engine.losses.LossWrapper
+  loss_fn:
+    _target_: torch.nn.MSELoss
+
+training:
+  n_repeats: 1
+  n_folds: 3
+  random_state: 42
+  save_dir: ~/miso/outputs/miso_sr_her2st
+  exp_name: miso_sr_her2st
+  save_model: True
+  splits: ~/miso/splits_benchmark_her2st.pkl
+
+fit_params:
+  n_epochs: 5
+  batch_size: 128
+  num_workers: 8
