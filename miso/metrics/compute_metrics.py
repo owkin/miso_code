@@ -1,5 +1,10 @@
-"""Metrics for evaluating the performance of a model."""
+"""
+Copyright (c) Owkin Inc.
+This source code is licensed under the CC BY-NC-SA 4.0 license found in the
+LICENSE file in the root directory of this source tree.
 
+Metrics for evaluating the performance of a model.
+"""
 import warnings
 
 import numpy as np

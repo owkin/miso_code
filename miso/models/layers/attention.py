@@ -1,5 +1,10 @@
-"""Implementation of self-attention and local self-attention."""
+"""
+Copyright (c) Owkin Inc.
+This source code is licensed under the CC BY-NC-SA 4.0 license found in the
+LICENSE file in the root directory of this source tree.
 
+Implementation of self-attention and local self-attention.
+"""
 import math
 import torch
 import warnings

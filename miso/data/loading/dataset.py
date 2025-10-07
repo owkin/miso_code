@@ -1,5 +1,10 @@
-"""Module used to load slides' features from a processed 10x Visium dataset."""
+"""
+Copyright (c) Owkin Inc.
+This source code is licensed under the CC BY-NC-SA 4.0 license found in the
+LICENSE file in the root directory of this source tree.
 
+Module used to load slides' features from a processed 10x Visium dataset.
+"""
 from __future__ import annotations
 
 import os

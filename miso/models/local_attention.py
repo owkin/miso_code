@@ -1,5 +1,10 @@
-"""Implementation of local attention MIL from  https://arxiv.org/abs/2205.06672."""
+"""
+Copyright (c) Owkin Inc.
+This source code is licensed under the CC BY-NC-SA 4.0 license found in the
+LICENSE file in the root directory of this source tree.
 
+Implementation of local attention MIL from  https://arxiv.org/abs/2205.06672.
+"""
 import torch
 
 from typing import Optional, List
