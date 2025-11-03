@@ -82,8 +82,8 @@ def main(
         :, ["pxl_col_in_fullres", "pxl_row_in_fullres"]
     ].values
     downsample = wsi.level_downsamples[level]
-    offset = tile_size / downsample
-    coords = (coords - np.round(offset)).astype(int)
+    offset = tile_size / 2
+    coords = (coords / downsample - np.round(offset)).astype(int)[:1000]
 
     feats, feats_subtile = [], []
     for coord_tile in tqdm(coords, total=len(coords)):
@@ -103,7 +103,8 @@ def main(
         coords_subtile = np.array(
             [[(level, i * 14, j * 14) for j in range(16)] for i in range(16)]
         )
-        coords_subtile = coord_tile * 16 + np.reshape(coords_subtile, (-1, 3)) / 14.
+        coords_subtile = np.reshape(coords_subtile, (-1, 3))
+        coords_subtile[:, 1:3] += coord_tile
 
         feats.append(
             np.concatenate(
