@@ -5,6 +5,7 @@ dataset:
   path_to_neighbors: ~/project/10X_data/processed
   path_to_gene_list: ~/miso/assets/100_genes.csv
   normalization: raw_reads
+  n_tiles: 10_000
 
 model:
   _target_: miso.models.LocalAttentionMIL
