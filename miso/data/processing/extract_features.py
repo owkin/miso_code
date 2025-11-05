@@ -101,7 +101,7 @@ def main(
         feats_ = output[:, 0].squeeze().cpu().numpy()
 
         coords_subtile = np.array(
-            [[(level, i * 14, j * 14) for j in range(16)] for i in range(16)],
+            [[(level, i * 14, j * 14) for i in range(16)] for j in range(16)],
             dtype=float
         )
         coords_subtile = np.reshape(coords_subtile, (-1, 3))
