@@ -3,7 +3,7 @@
 <h1>MISO: A deep learning-based multiscale integration of spatial omics with tumor morphology</h1>
 
 <!-- Short description -->
-Pre-print available on [tba](https://arxiv.org/).
+Pre-print available on [biorXiv](https://www.biorxiv.org/content/10.1101/2024.07.22.604083v1.abstract).
 
 </div>
 
@@ -101,3 +101,22 @@ For instance, to generate pseudolabels with a model trained with config `miso/co
 It is then possible to train a weakly-supervised model for super-resolved prediction of gene expression by launching
 
 ```python miso/train.py --config-name=distil.yaml```
+
+## Super-resolution
+
+The notebook `notebooks/super-resolved-inference` shows how to run super-resolution inference on Her2ST and on an example slide from TCGA. When computing super-resolved gene expression, the tiling grid might be apparent on the resulting heatmap because the features from a given patch depend on the whole tile content, as a result of self-attention. To avoid this effect, the model is applied to a tiling with overlap, controlled by a stride parameter. Smaller strides will give a smoother result, at the expense of a larger computational cost. Below are examples of predicted KRT8 expression on the example slide from TCGA, using strides of 112 pixels and 56 pixels respectively, for a tile size of 224.
+
+<figure>
+  <figcaption>Thumbnail of slide TCGA-A1-A0SB-01Z-00-DX1.B34C267B-CAAA-4AB6-AD5C-276C26F997A1.svs:</figcaption>
+  <img src="./assets/thumbnail.png" alt="thumbnail.png" width="500"/>
+</figure>
+
+<figure>
+  <figcaption>Super-resolved inference of KRT8 expression, stride = 112:</figcaption>
+  <img src="./assets/KRT8_expr_stride_112.png" alt="stride-112" width="500"/>
+</figure>
+
+<figure>
+  <figcaption>Super-resolved inference of KRT8 expression, stride = 56:</figcaption>
+  <img src="./assets/KRT8_expr_stride_56.png" alt="stride-56" width="500"/>
+</figure>
