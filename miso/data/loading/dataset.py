@@ -248,7 +248,7 @@ class DatasetSlideSubsample:
         self.neighbors = []
         list_gene_names = []
         self.barcodes = []
-        for slide_id in self.slide_ids:
+        for slide_id in self.slide_names:
             slide_data = self.load_slide_data(
                 slide_id=slide_id,
                 path_to_feats=self.path_to_feats,
